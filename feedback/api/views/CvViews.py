@@ -1,16 +1,17 @@
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser , IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from feedback.models import Cv
-from ..serializers import ReadCvSerializer, WriteCommentSerializer
+from ..serializers import ReadCvSerializer, WriteCvSerializer
 from rest_framework import status
 from django.http import Http404
 
 
 class CvList(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get(self, request, format=None):
         cvs = Cv.objects.all()
@@ -18,7 +19,7 @@ class CvList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = WriteCommentSerializer(data=request.data)
+        serializer = WriteCvSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -26,8 +27,7 @@ class CvList(APIView):
 
 
 class CvDetails(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_object(self, pk):
         try:
