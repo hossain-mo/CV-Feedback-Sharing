@@ -10,7 +10,7 @@ from django.http import Http404
 
 class CommentList(APIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, format=None):
         cvs = Comment.objects.all()

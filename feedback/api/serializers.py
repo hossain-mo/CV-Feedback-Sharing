@@ -2,6 +2,7 @@ from rest_framework import serializers
 from ..models import Cv, Comment, Follow, Like
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.auth.hashers import make_password
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -91,3 +92,4 @@ class WriteFollowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follow
         exclude = ['creation_date']
+
