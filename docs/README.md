@@ -5,10 +5,10 @@ because it not hosted yet
 
 
 ### Database ERD
-![SQL ERD](/erd.png?raw=true)
+![SQL ERD](https://github.com/hossain-mo/CV-Feedback-Sharing/tree/master/docs/erd.png?raw=true)
 
 ### Activity diagram
-![webiste activity diagram](/activity.png?raw=true)
+![webiste activity diagram](https://github.com/hossain-mo/CV-Feedback-Sharing/tree/master/docs/activity.png?raw=true)
 
 ## Getting Started
 These instructions will get you a copy of the REST API running on your local machine for development and testing purposes.
